@@ -11,16 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141025165104) do
+ActiveRecord::Schema.define(version: 20141025180842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
   create_table "users", id: :uuid, force: true do |t|
-    t.string   "facebook_uid", null: false
+    t.string   "facebook_uid",  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "gender"
+    t.string   "interested_in"
+    t.string   "location"
     t.index ["facebook_uid"], :name => "index_users_on_facebook_uid", :unique => true, :case_sensitive => false
   end
 
