@@ -8,7 +8,16 @@ class User < ActiveRecord::Base
     def from_facebook!(fb_user)
       user = find_by(facebook_uid: fb_user.id.to_s)
       return user if user.present?
-      create!(facebook_uid: fb_user.id.to_s)
+
+      create!(
+        first_name:    fb_user.first_name,
+        last_name:     fb_user.last_name,
+        gender:        fb_user.gender,
+        birthday:      fb_user.birthday,
+        location_uid:  fb_user.location_id,
+        location_name: fb_user.location_name,
+        facebook_uid:  fb_user.id.to_s
+      )
     end
   end
 end

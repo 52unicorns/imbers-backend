@@ -25,7 +25,9 @@ ActiveRecord::Schema.define(version: 20141025180842) do
     t.string   "last_name"
     t.string   "gender"
     t.string   "interested_in"
-    t.string   "location"
+    t.string   "location_uid"
+    t.string   "location_name"
+    t.string   "birthday"
     t.index ["facebook_uid"], :name => "index_users_on_facebook_uid", :unique => true, :case_sensitive => false
   end
 
