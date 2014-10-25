@@ -11,10 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141025155037) do
+ActiveRecord::Schema.define(version: 20141025165104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "users", id: :uuid, force: true do |t|
+    t.string   "facebook_uid", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["facebook_uid"], :name => "index_users_on_facebook_uid", :unique => true, :case_sensitive => false
+  end
+
+  create_table "access_tokens", id: :uuid, force: true do |t|
+    t.string   "token",      null: false
+    t.integer  "expires_in", null: false
+    t.uuid     "user_id",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["token"], :name => "index_access_tokens_on_token", :unique => true, :case_sensitive => false
+    t.index ["user_id"], :name => "fk__access_tokens_user_id"
+    t.foreign_key ["user_id"], "users", ["id"], :on_update => :no_action, :on_delete => :no_action, :name => "fk_access_tokens_user_id"
+  end
 
 end

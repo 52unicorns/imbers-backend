@@ -1,0 +1,8 @@
+json:
+  errors:
+    format: '%{attribute} %{message}'
+    messages:
+      blank: missing_field
+      empty: missing_field
+      equal_to: invalid
+      taken: already_exists
