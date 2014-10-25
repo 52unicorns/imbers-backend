@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20141025165104) do
     t.string   "token",      null: false
     t.integer  "expires_in", null: false
     t.uuid     "user_id",    null: false
+    t.datetime "revoked_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["token"], :name => "index_access_tokens_on_token", :unique => true, :case_sensitive => false

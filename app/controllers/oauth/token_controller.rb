@@ -23,7 +23,7 @@ module Oauth
       fb_user = Facebook.find params[:assertion]
       return invalid_access_token! if fb_user.blank?
 
-      user = User.fb_user!(fb_user)
+      user = User.from_facebook!(fb_user)
       respond_with AccessToken.create! user: user
     end
 

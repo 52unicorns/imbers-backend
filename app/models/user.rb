@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
                            uniqueness: { case_sensitive: false }
 
   class << self
-    def fb_user!(fb_user)
+    def from_facebook!(fb_user)
       user = find_by(facebook_uid: fb_user.id.to_s)
       return user if user.present?
       create!(facebook_uid: fb_user.id.to_s)

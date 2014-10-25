@@ -4,6 +4,7 @@ class CreateAccessTokens < ActiveRecord::Migration
       t.string :token, null: false, index: { unique: true, case_sensitive: false }
       t.integer :expires_in, null: false
       t.uuid :user_id, null: false
+      t.datetime :revoked_at
       t.timestamps
     end
   end

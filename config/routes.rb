@@ -3,5 +3,6 @@ Rails.application.routes.draw do
 
   namespace :oauth do
     resources :token, only: [:create]
+    resources :revoke, only: [:create]
   end
 end
