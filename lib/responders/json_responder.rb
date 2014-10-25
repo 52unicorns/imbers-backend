@@ -1,3 +1,5 @@
+# rubocop:disable MethodLength
+# TODO(vesln): meh, but well... :)
 module Responders
   module JsonResponder
     def api_behavior(error)
@@ -33,3 +35,4 @@ module Responders
     end
   end
 end
+# rubocop:enable MethodLength
