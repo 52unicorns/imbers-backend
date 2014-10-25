@@ -3,6 +3,9 @@ ENV['RAILS_ENV'] ||= 'test'
 require 'spec_helper'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
+require 'sidekiq/testing'
+
+Sidekiq::Testing.fake!
 
 FIXTURES = YAML.load_file(File.expand_path('../fixtures/base.yml', __FILE__))
 FIXTURES.symbolize_keys!
