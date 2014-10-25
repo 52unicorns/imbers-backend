@@ -17,6 +17,7 @@ gem 'sidekiq'
 gem 'slim', '>= 1.1.0'
 gem 'sinatra', '>= 1.3.0', require: false
 
+gem 'koala'
 gem 'uglifier'
 
 group :development, :test do
