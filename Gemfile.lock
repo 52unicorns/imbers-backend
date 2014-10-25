@@ -65,6 +65,9 @@ GEM
     hike (1.2.3)
     hitimes (1.2.2)
     i18n (0.6.11)
+    jbuilder (2.2.4)
+      activesupport (>= 3.0.0, < 5)
+      multi_json (~> 1.2)
     json (1.8.1)
     koala (1.9.0)
       addressable
@@ -199,6 +202,7 @@ DEPENDENCIES
   dotenv-rails
   factory_girl_rails
   foreman
+  jbuilder
   koala
   pg
   pry-rails

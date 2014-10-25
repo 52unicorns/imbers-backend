@@ -6,4 +6,10 @@ Rails.application.routes.draw do
     resources :revoke, only: [:create]
     resource :test, only: [:show]
   end
+
+  namespace :api do
+    namespace :v0 do
+      resources :matches, only: [:index]
+    end
+  end
 end

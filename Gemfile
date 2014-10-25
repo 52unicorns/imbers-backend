@@ -10,6 +10,7 @@ gem 'pry-rails'
 # API
 gem 'responders'
 gem 'active_model_serializers'
+gem 'jbuilder'
 
 # Background jobs
 gem 'clockwork'

@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
   respond_to :json
   responders :json
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  helper_method :current_user
 
   private
 
