@@ -2,3 +2,6 @@ en:
   oauth:
     invalid_request: The request is missing a required parameter, includes an unsupported parameter value, or is otherwise malformed.
     invalid_access_token: The provided resource owner credentials are not valid, or resource owner cannot be found
+
+  http_errors:
+    not_found: The requested resource cannot be found
