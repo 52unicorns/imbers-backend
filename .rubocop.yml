@@ -1,0 +1,14 @@
+AllCops:
+  Excludes:
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'config/initializers/**/*'
+    - 'vendor/**/*'
+    - '*.tmp.rb'
+  RunRailsCops: true
+
+LineLength:
+  Max: 120
+
+Documentation:
+  Enabled: false
