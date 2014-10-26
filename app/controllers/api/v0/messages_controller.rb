@@ -2,7 +2,7 @@ module Api
   module V0
     class MessagesController < MatchBaseController
       def index
-        @messages = @match.messages.since(params[:since])
+        @messages = @match.messages.since(since)
       end
 
       def create
