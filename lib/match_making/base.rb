@@ -5,6 +5,10 @@ module MatchMaking
         Neography::Rest.new
       end
 
+      def call(user)
+        format_matches(query(user.facebook_uid))
+      end
+
       def format_matches(matches)
         matches['data'].map do |record|
           record[0]
