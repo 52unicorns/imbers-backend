@@ -18,4 +18,8 @@ class User < ActiveRecord::Base
       )
     end
   end
+
+  def avatar_url
+    "https://graph.facebook.com/#{facebook_uid}/picture"
+  end
 end

@@ -3,6 +3,6 @@ json.array! @matches do |match|
   user = match.user1_id == current_user.id ? match.user1 : match.user2
 
   json.user do |u|
-    u.(user, :id, :first_name)
+    u.(user, :id, :first_name, :avatar_url)
   end
 end
