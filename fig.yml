@@ -10,3 +10,7 @@ neo4j:
   image: tpires/neo4j
   ports:
     - "7474:7474"
+neo4jtest:
+  image: tpires/neo4j
+  ports:
+    - "7475:7474"

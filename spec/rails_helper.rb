@@ -13,6 +13,19 @@ FIXTURES.symbolize_keys!
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 ActiveRecord::Migration.maintain_test_schema!
 
+VCR.configure do |c|
+  c.configure_rspec_metadata!
+  c.ignore_hosts ENV['NEO4J_TEST_HOST']
+  c.cassette_library_dir = 'spec/cassettes'
+  c.hook_into :webmock
+  c.ignore_localhost = true
+  c.default_cassette_options = {
+    serialize_with: :json,
+    decode_compressed_response: :json,
+    preserve_exact_body_bytes: true
+  }
+end
+
 RSpec.configure do |config|
   config.include SpecSupport::RequestHelpers, type: :request
   config.include SpecSupport::AuthHelpers, type: :request
@@ -38,5 +51,15 @@ RSpec.configure do |config|
 
   config.after(:each) do
     DatabaseCleaner.clean
+  end
+
+  config.before(:each) do
+    neo = Neography::Rest.new
+
+    begin
+      neo.execute_query('START n0=node(0),nx=node(*) MATCH n0-[r0]-(),nx-[rx]-() WHERE nx <> n0 DELETE r0,rx,nx')
+    rescue Neography::NotFoundException => e
+      # noop
+    end
   end
 end
