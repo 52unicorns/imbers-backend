@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
         first_name:    fb_user.first_name,
         last_name:     fb_user.last_name,
         gender:        fb_user.gender,
+        access_token:  fb_user.access_token,
         birthday:      fb_user.birthday,
         location_uid:  fb_user.location_id,
         location_name: fb_user.location_name,

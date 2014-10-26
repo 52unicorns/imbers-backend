@@ -1,8 +1,17 @@
 module Facebook
   class User
-    attr_reader :params
+    attr_reader :params, :access_token
 
-    def initialize(params = {})
+    class << self
+      def find(access_token)
+        client = Koala::Facebook::API.new(access_token)
+        params = client.get_object('me')
+        new(access_token, params)
+      end
+    end
+
+    def initialize(client, params = {})
+      @client = client
       @params = params.symbolize_keys!
     end
 
@@ -35,6 +44,10 @@ module Facebook
     end
 
     private
+
+    def client
+      @client ||= Koala::Facebook::API.new(access_token)
+    end
 
     def location
       params.fetch(:location) { Hash.new }
