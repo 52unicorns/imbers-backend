@@ -26,9 +26,6 @@ class Message < ActiveRecord::Base
 
   def verify_message_count
     return if match.blank?
-
-    if match.messages.count >= LIMIT
-      errors.add(:general, 'you cannot send more messages')
-    end
+    errors.add(:general, 'you cannot send more messages') if match.messages.count >= LIMIT
   end
 end
