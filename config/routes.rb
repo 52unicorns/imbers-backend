@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v0 do
-      resources :matches, only: [:index] do
+      resources :matches, only: [:index, :show] do
         resources :reveal, only: [:create]
         resources :messages, only: [:create, :index]
       end
