@@ -1,6 +1,13 @@
 class MatchMaker
   attr_reader :user
 
+  ALGORITHMS = [
+    MatchMaking::FriendsInterests,
+    MatchMaking::Friends,
+    MatchMaking::Interests,
+    MatchMaking::Simple
+  ]
+
   class << self
     def create(user)
       new(user).perform
@@ -12,17 +19,26 @@ class MatchMaker
   end
 
   def perform
-    simple
+    matches = nil
+
+    ALGORITHMS.each do |alg|
+      matches = alg.call(user)
+      break if matches.present?
+    end
+
+    return unless matches.present?
+    other_user = User.find_by!(facebook_uid: matches.first)
+    create_match(user, other_user)
   end
 
   private
 
-  def simple
-    other_user = User.where.not(id: user.id).first
-    return if other_user.blank?
+  def create_match(user, other_user)
     Match.create!.tap do |match|
       match.match_users.create! user: user
       match.match_users.create! user: other_user
     end
+
+    # TODO(vesln): neo4j relationship
   end
 end

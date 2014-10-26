@@ -13,8 +13,8 @@ module Like
 
   def crete_like_node(like)
     node = Neography::Node.create_unique('like_index', 'uid', like['id'],
-                                           'uid' => like['id'],
-                                           'name' => like['name'])
+                                         'uid' => like['id'],
+                                         'name' => like['name'])
     node.add_to_index('like_index', 'uid', like['id'])
     node
   end

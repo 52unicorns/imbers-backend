@@ -17,8 +17,8 @@ module Friendship
 
   def create_friend_node(friend)
     node = Neography::Node.create_unique('user_index', 'uid', friend['id'],
-                                           'uid' => friend['id'],
-                                           'name' => friend['name'])
+                                         'uid' => friend['id'],
+                                         'name' => friend['name'])
     node.add_to_index('user_index', 'uid', friend['id'])
     node
   end
