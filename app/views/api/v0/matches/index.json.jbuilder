@@ -3,6 +3,8 @@ json.array! @matches do |match|
 
   json.(match, :id, :created_at)
 
+  json.revealed match.revealed?
+
   json.user do |u|
     u.(user, :id, :first_name, :avatar_url)
   end
