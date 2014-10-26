@@ -4,7 +4,7 @@ module Api
       before_action :find_match
 
       def index
-        @messages = @match.messages
+        @messages = @match.messages.since(params[:since])
       end
 
       def create
