@@ -55,11 +55,6 @@ RSpec.configure do |config|
 
   config.before(:each) do
     neo = Neography::Rest.new
-
-    begin
-      neo.execute_query('START n0=node(0),nx=node(*) MATCH n0-[r0]-(),nx-[rx]-() WHERE nx <> n0 DELETE r0,rx,nx')
-    rescue Neography::NotFoundException => e
-      # noop
-    end
+    neo.execute_query('MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n,r')
   end
 end
