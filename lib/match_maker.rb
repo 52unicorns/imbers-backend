@@ -20,6 +20,9 @@ class MatchMaker
   def simple
     other_user = User.where.not(id: user.id).first
     return if other_user.blank?
-    Match.create!(user1: user, user2: other_user)
+    Match.create!.tap do |match|
+      match.match_users.create! user: user
+      match.match_users.create! user: other_user
+    end
   end
 end

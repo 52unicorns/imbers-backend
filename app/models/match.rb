@@ -1,16 +1,13 @@
 class Match < ActiveRecord::Base
   default_scope { order('created_at DESC') }
 
-  belongs_to :user1, class_name: User
-  belongs_to :user2, class_name: User
   has_many :messages
-
-  validates :user1_id, presence: true
-  validates :user2_id, presence: true
+  has_many :match_users
+  has_many :users, through: :match_users
 
   class << self
     def for(user)
-      where('user1_id = :user_id OR user2_id = :user_id', user_id: user.id)
+      joins(:match_users).where(match_users: { user_id: user.id })
     end
   end
 end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe '/api/v0/matches/:match_id/messages' do
   before { authenticate! }
-  let(:match) { create :match, user1: current_user }
+  let(:match) { create :match, users: [current_user] }
 
   describe 'POST /' do
     it 'creates a new messages' do

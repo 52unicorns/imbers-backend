@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141025195247) do
+ActiveRecord::Schema.define(version: 20141026055127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,14 +44,18 @@ ActiveRecord::Schema.define(version: 20141025195247) do
   end
 
   create_table "matches", id: :uuid, force: true do |t|
-    t.uuid     "user1_id",   null: false
-    t.uuid     "user2_id",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["user1_id"], :name => "fk__matches_user1_id"
-    t.index ["user2_id"], :name => "fk__matches_user2_id"
-    t.foreign_key ["user1_id"], "users", ["id"], :on_update => :no_action, :on_delete => :no_action, :name => "fk_matches_user1_id"
-    t.foreign_key ["user2_id"], "users", ["id"], :on_update => :no_action, :on_delete => :no_action, :name => "fk_matches_user2_id"
+  end
+
+  create_table "match_users", id: :uuid, force: true do |t|
+    t.uuid    "user_id",                  null: false
+    t.uuid    "match_id",                 null: false
+    t.boolean "revealed", default: false, null: false
+    t.index ["match_id"], :name => "fk__match_users_match_id"
+    t.index ["user_id"], :name => "fk__match_users_user_id"
+    t.foreign_key ["match_id"], "matches", ["id"], :on_update => :no_action, :on_delete => :no_action, :name => "fk_match_users_match_id"
+    t.foreign_key ["user_id"], "users", ["id"], :on_update => :no_action, :on_delete => :no_action, :name => "fk_match_users_user_id"
   end
 
   create_table "messages", id: :uuid, force: true do |t|

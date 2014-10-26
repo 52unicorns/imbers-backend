@@ -8,7 +8,7 @@ describe MatchMaker do
 
       match = MatchMaker.create(user)
 
-      expect(match.user2).to eq other_user
+      expect(match.users) =~ [user, other_user]
     end
 
     it 'returns nil if it cannot create a match' do
