@@ -18,7 +18,8 @@ module Api
 
       def since
         return if params[:since].blank?
-        params[:since].to_datetime.strftime('%Y-%m-%d %H:%M:%S.%N')
+        # Forgive me, Lord
+        params[:since].to_datetime + 1.second
       end
     end
   end
