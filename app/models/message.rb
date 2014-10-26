@@ -1,4 +1,6 @@
 class Message < ActiveRecord::Base
+  LIMIT = 50
+
   default_scope { order('created_at DESC') }
 
   belongs_to :user
@@ -8,6 +10,8 @@ class Message < ActiveRecord::Base
   validates :match_id, presence: true
   validates :body, presence: true
 
+  before_validation :verify_message_count
+
   class << self
     def since(date = nil)
       if date.present?
@@ -15,6 +19,16 @@ class Message < ActiveRecord::Base
       else
         where(nil)
       end
+    end
+  end
+
+  private
+
+  def verify_message_count
+    return if match.blank?
+
+    if match.messages.count >= LIMIT
+      errors.add(:general, 'you cannot send more messages')
     end
   end
 end
