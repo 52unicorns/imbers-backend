@@ -20,6 +20,7 @@ gem 'sinatra', '>= 1.3.0', require: false
 
 gem 'koala'
 gem 'uglifier'
+gem 'neography'
 
 group :development, :test do
   gem 'foreman'
