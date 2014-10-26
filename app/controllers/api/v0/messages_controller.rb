@@ -6,10 +6,12 @@ module Api
       end
 
       def create
-        respond_with @match.messages.create!(
+        @message = @match.messages.create(
           body: params[:body],
           user: current_user
         )
+
+        respond_with @message if @message.invalid?
       end
     end
   end

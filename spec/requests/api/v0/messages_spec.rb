@@ -8,7 +8,12 @@ describe '/api/v0/matches/:match_id/messages' do
     it 'creates a new messages' do
       params = { body: 'test' }
       post "/api/v0/matches/#{match.id}/messages", params, http_env
-      expect(response.status).to eq 201
+      expect(response.status).to eq 200
+    end
+
+    it 'returns an error when the params are invalid' do
+      post "/api/v0/matches/#{match.id}/messages", nil, http_env
+      expect(response.status).to eq 422
     end
   end
 
